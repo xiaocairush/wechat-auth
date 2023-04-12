@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  redis:
+    host: 'localhost'
+    port: 6379
+#    password: 479368      # Redis 服务器密码，默认为空。生产中，一定要设置 Redis 密码！
+    database: 0           # Redis 数据库号，默认为 0
+    timeout: 15000        # Redis 连接超时时间，单位：毫秒。
+      # 对应 RedisProperties.Jedis 内部类
+    jedis:
+      pool:
+        max-active: 8     # 连接池最大连接数，默认为 8 。使用负数表示没有限制    同一时间最大只能执行8条sql语句，每执行一条语句就会建立一个连接
+        max-idle: 8       # 默认连接数最大空闲的连接数，默认为 8 。使用负数表示没有限制。
+        min-idle: 0       # 默认连接池最小空闲的连接数，默认为 0 。允许设置 0 和 正数。
+        max-wait: -1      # 连接池最大阻塞等待时间，单位：毫秒。默认为 -1 ，表示不限制。    执行语句到数据库响应数据的时间
+
+  security:
+    oauth2:
+      client:
+        registration:
+          # 前端网页授权： http://localhost:8080/oauth2/authorization/wechat
+          wechat:
+            # appid
+            client-id: xxxx
+            # secret
+            client-secret: xxx
+            # oauth2 login 用 '{baseUrl}/login/oauth2/code/{registrationId}'会自动解析
+            # oauth2 client 写你的业务链接即可
+            redirect-uri:  '{baseUrl}/login/oauth2/code/{registrationId}'
+            authorization-grant-type: authorization_code
+            scope: snsapi_login
+        provider:
+          wechat:
+            authorization-uri: https://open.weixin.qq.com/connect/qrconnect
+            token-uri: https://api.weixin.qq.com/sns/oauth2/access_token
+            user-info-uri: https://api.weixin.qq.com/sns/userinfo
