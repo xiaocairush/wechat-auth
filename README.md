@@ -1,4 +1,4 @@
-# wechat_auth
+# wechat-auth
 
 ## 介绍
 如果你想要在spring mvc应用中使用spring security oauth2进行微信登陆，你可以参考这个项目作为一个例子，节省开发时间。本项目仅作为样例参考，线上谨慎使用，初衷是为自己存档代码
